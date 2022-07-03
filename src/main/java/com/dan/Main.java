@@ -2,14 +2,13 @@ package com.dan;
 
 import com.dan.controller.HelloServlet;
 import com.dan.controller.TemplateEngine;
-import com.dan.dao.UserDao;
-import com.dan.dao.UserJdbcDao;
+import com.dan.dao.MessageDao;
+import com.dan.dao.MessageJdbcDao;
+import com.dan.service.MessageService;
+import com.dan.service.MessageServiceImpl;
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.servlet.FilterHolder;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
-
-import java.util.EnumSet;
 
 
 public class Main {
@@ -24,14 +23,15 @@ public class Main {
         System.out.println("PORT: " + port);
         Server server = new Server(port);
         ServletContextHandler handler = new ServletContextHandler();
-        final UserDao userDao = new UserJdbcDao();
+        final MessageDao userDao = new MessageJdbcDao();
+        MessageService userService = new MessageServiceImpl(userDao);
         TemplateEngine templateEngine = new TemplateEngine();
 
 //        SessionHandler sessionHandler = new SessionHandler();
 //        handler.setSessionHandler(sessionHandler);
 
 
-        handler.addServlet(new ServletHolder(new HelloServlet(templateEngine)), "/hello");
+        handler.addServlet(new ServletHolder(new HelloServlet(templateEngine,userService)), "/hello");
 //        handler.addServlet(new ServletHolder(new LoginServlet(userDao, templateEngine)), "/");
 //        handler.addServlet(new ServletHolder(new FileServlet()), "/assets/*");
 //        handler.addFilter(new FilterHolder(new LoginFilter(templateEngine, userDao)), "/*", EnumSet.of(DispatcherType.REQUEST));
