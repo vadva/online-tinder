@@ -1,6 +1,6 @@
-package com.dan.dao;
+package com.tinder.dao;
 
-import com.dan.Enteties.User;
+import com.tinder.Enteties.User;
 
 import java.util.List;
 

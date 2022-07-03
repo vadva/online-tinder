@@ -1,4 +1,5 @@
-package com.dan.controller;
+package com.tinder.controller;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -7,16 +8,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class HelloServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
     private TemplateEngine templateEngine;
 
-    public HelloServlet(TemplateEngine templateEngine) {
+    public LoginServlet(TemplateEngine templateEngine) {
         this.templateEngine = templateEngine;
     }
+
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HashMap<String, Object> data = new HashMap<>(1);
-        data.put("user", "user name");
-        templateEngine.render("hello.ftl", data, resp);
-        //req.getRequestDispatcher("/hello.ftl").forward(req, resp);
+        HashMap<String, Object> data = new HashMap<>();
+        data.put("user", "Den");
+        templateEngine.render("login.ftl", data, resp);
     }
 }
