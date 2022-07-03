@@ -1,6 +1,6 @@
-package com.tinder.dao;
+package com.dan.dao;
 
-import com.tinder.Enteties.User;
+import com.dan.Enteties.User;
 import org.postgresql.ds.PGPoolingDataSource;
 
 import java.util.List;

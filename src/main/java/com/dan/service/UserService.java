@@ -1,4 +1,4 @@
-package com.tinder.service;
+package com.dan.service;
 
 public class UserService {
 }

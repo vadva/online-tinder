@@ -1,4 +1,4 @@
-package com.tinder.controller;
+package com.dan.controller;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;

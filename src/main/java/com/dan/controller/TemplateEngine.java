@@ -1,4 +1,4 @@
-package com.tinder.controller;
+package com.dan.controller;
 
 import freemarker.template.Configuration;
 import freemarker.template.TemplateException;

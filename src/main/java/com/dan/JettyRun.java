@@ -1,9 +1,9 @@
-package com.tinder;
+package com.dan;
 
-import com.tinder.controller.FileServlet;
-import com.tinder.controller.LikesServlet;
-import com.tinder.controller.LoginServlet;
-import com.tinder.controller.TemplateEngine;
+import com.dan.controller.FileServlet;
+import com.dan.controller.LikesServlet;
+import com.dan.controller.LoginServlet;
+import com.dan.controller.TemplateEngine;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;

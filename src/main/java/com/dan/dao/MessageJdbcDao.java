@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class MessageJdbcDao implements MessageDao {
+public class MessageJdbcDao implements com.dan.dao.MessageDao {
     private PGPoolingDataSource source;
 
     public MessageJdbcDao() {
