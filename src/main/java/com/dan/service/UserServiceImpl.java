@@ -1,26 +1,62 @@
 package com.dan.service;
 
 import com.dan.Enteties.User;
+import com.dan.dao.UserDao;
 import java.util.List;
 
-public interface UserServiceImpl {
-  boolean create(User user);
+public class UserServiceImpl implements UserService {
 
-  User read(Long id);
+  private UserDao userDao;
 
-  void update(User user);
+  public UserServiceImpl(UserDao userDao) {
+    this.userDao = userDao;
+  }
 
-  boolean delete(Long id);
+  @Override
+  public boolean create(User user) {
+    return userDao.create(user);
+  }
 
-  List<User> findAll();
+  @Override
+  public User read(Long id) {
+    return userDao.read(id);
+  }
 
-  User findByLoginPass(String login, String password);
+  @Override
+  public void update(User user) {
+    userDao.update(user);
+  }
+
+  @Override
+  public boolean delete(Long id) {
+    return userDao.delete(id);
+  }
+
+  @Override
+  public List<User> findAll() {
+    return userDao.findAll();
+  }
+
+  @Override
+  public User findByLoginPass(String login, String password) {
+    return userDao.findByLoginPass(login, password);
+  }
 
 
-  boolean setIsLiked(Long id, boolean isLiked);
+  // _________________________________________________________
+  @Override
+  public boolean setIsLiked(Long id, boolean isLiked) {
+    return false;
+  }
 
-  boolean addLikedToList(Long user_id);
+  @Override
+  public boolean addLikedToList(Long user_id) {
+    return false;
+  }
 
-  boolean addChatToList(Long chat_id);
+  @Override
+  public boolean addChatToList(Long chat_id) {
+    return false;
+  }
 
 }
