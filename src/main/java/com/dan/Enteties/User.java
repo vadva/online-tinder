@@ -133,7 +133,6 @@ public class User {
         ", age=" + age +
         ", profession='" + profession + '\'' +
         ", lastLogin=" + lastLogin +
-        ", liked=" + isLiked +
         '}';
   }
 
