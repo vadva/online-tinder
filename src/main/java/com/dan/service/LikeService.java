@@ -1,9 +1,7 @@
-package com.dan.dao;
-
-import com.dan.Enteties.User;
+package com.dan.service;
 
 import java.util.List;
 
-public interface LikesDao {
+public interface LikeService {
     public List<Integer> readLikedUsers (int userId);
 }

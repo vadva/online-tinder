@@ -4,7 +4,11 @@ import com.dan.controller.FileServlet;
 import com.dan.controller.LikesServlet;
 import com.dan.controller.LoginServlet;
 import com.dan.controller.TemplateEngine;
+import com.dan.dao.LikesDao;
+import com.dan.dao.LikesJdbcDao;
 import com.dan.dao.UserJdbcDao;
+import com.dan.service.LikeService;
+import com.dan.service.LikeServiceImpl;
 import com.dan.service.UserServiceImpl;
 import com.dan.service.UserService;
 import org.eclipse.jetty.server.Server;
@@ -25,8 +29,13 @@ public class JettyRun {
 
         Server server = new Server(port);
         ServletContextHandler handler = new ServletContextHandler();
-        TemplateEngine templateEngine = new TemplateEngine();
         UserService userService = new UserServiceImpl(new UserJdbcDao());
+
+        final LikesDao likesDao = new LikesJdbcDao();
+        LikeService likeService = new LikeServiceImpl(likesDao);
+
+        TemplateEngine templateEngine = new TemplateEngine();
+
 
         handler.addServlet(new ServletHolder(new FileServlet()), "/assets/*");
         handler.addServlet(new ServletHolder(new LoginServlet(templateEngine)), "/");
