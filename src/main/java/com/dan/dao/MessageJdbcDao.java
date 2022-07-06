@@ -25,7 +25,6 @@ public class MessageJdbcDao implements com.dan.dao.MessageDao {
         source.setMaxConnections(10);
     }
 
-
     @Override
     public Message createMessage() {
         return null;
@@ -42,9 +41,11 @@ public class MessageJdbcDao implements com.dan.dao.MessageDao {
             List <Message> allMessages = new ArrayList<>();
         try{
             connection= source.getConnection();
+            System.out.println(connection);
             connection.setAutoCommit(false);
-
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM messages");
+
+            System.out.println(preparedStatement);
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 long message_id = resultSet.getLong("message_id");
