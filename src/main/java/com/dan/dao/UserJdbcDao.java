@@ -26,7 +26,7 @@ public class UserJdbcDao implements UserDao{
             connection = source.getConnection();
 
             PreparedStatement preparedStatement = connection.prepareStatement(
-                "INSERT INTO users.users(name, login, password) VALUES (?, ?, ?)");
+                "INSERT INTO tinder.users(name, login, password) VALUES (?, ?, ?)");
             preparedStatement.setString(1, user.getUserName());
             preparedStatement.setString(2, user.getLogin());
             preparedStatement.setString(3, user.getPassword());
@@ -62,7 +62,8 @@ public class UserJdbcDao implements UserDao{
             connection = source.getConnection();
 
             PreparedStatement preparedStatement = connection.prepareStatement(
-                "SELECT user_id, login, password, is_online, name, age, about_self, picture_src, AGE(CURRENT_TIMESTAMP(0), log_out_date) as last_online FROM users.users WHERE user_id=?");
+                "SELECT user_id, login, password, is_online, name, age, about_self, picture_src, " +
+                    "AGE(CURRENT_TIMESTAMP(0), log_out_date) as last_online FROM tinder.users WHERE user_id=?");
             preparedStatement.setString(1,  String.valueOf(userId));
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -120,7 +121,7 @@ public class UserJdbcDao implements UserDao{
             PreparedStatement preparedStatement = connection.prepareStatement(
 //          "SELECT id, name, login, password, lastLogin, pictureSrc, AGE() FROM users.users"
                 "SELECT user_id, login, password, is_online, name, age, about_self, picture_src, " +
-                    "AGE(CURRENT_TIMESTAMP(0), log_out_date) as last_online FROM users.users"
+                    "AGE(CURRENT_TIMESTAMP(0), log_out_date) as last_online FROM tinder.users"
             );
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -180,7 +181,8 @@ public class UserJdbcDao implements UserDao{
         try {
             connection = source.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                "SELECT user_id, login, password, is_online, name, age, about_self, picture_src, AGE(CURRENT_TIMESTAMP(0), log_out_date) as last_online FROM users.users WHERE login=? AND password=?");
+                "SELECT user_id, login, password, is_online, name, age, about_self, picture_src, " +
+                    "AGE(CURRENT_TIMESTAMP(0), log_out_date) as last_online FROM tinder.users WHERE login=? AND password=?");
             preparedStatement.setString(1, loginUser);
             preparedStatement.setString(2, passwordUser);
 
