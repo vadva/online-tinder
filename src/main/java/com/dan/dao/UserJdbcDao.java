@@ -12,10 +12,10 @@ public class UserJdbcDao implements UserDao{
 
     public UserJdbcDao() {
         source = new PGPoolingDataSource();
-        source.setServerName("ec2-44-206-89-185.compute-1.amazonaws.com");
-        source.setDatabaseName("d510kv5rqp7kj4");
-        source.setUser("exngnvawvnrjtl");
-        source.setPassword("d4b260ee769bcaf553983c3decac5c8f6b406cd7dcf5d75a369d0372e5b6d0ba");
+        source.setServerName("ec2-54-159-22-90.compute-1.amazonaws.com");
+        source.setDatabaseName("d72gjotub2dfrp");
+        source.setUser("wmnxpqntdirjkb");
+        source.setPassword("ce9b5659604e1a2691c26617919799d3759e183430c601440e2c2d96a99b4653");
         source.setMaxConnections(10);
     }
 
