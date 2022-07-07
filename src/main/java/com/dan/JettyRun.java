@@ -3,9 +3,13 @@ package com.dan;
 import com.dan.controller.*;
 import com.dan.dao.*;
 import com.dan.service.*;
+import org.eclipse.jetty.servlet.FilterHolder;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+
+import javax.servlet.DispatcherType;
+import java.util.EnumSet;
 
 
 public class JettyRun {
@@ -30,9 +34,19 @@ public class JettyRun {
 
         TemplateEngine templateEngine = new TemplateEngine();
 
+        handler.addFilter(new FilterHolder(new LoginFilter(templateEngine, userService)), "/*", EnumSet.of(DispatcherType.REQUEST));
 
         handler.addServlet(new ServletHolder(new FileServlet()), "/assets/*");
-        handler.addServlet(new ServletHolder(new LoginServlet(templateEngine)), "/");
+        handler.addServlet(new ServletHolder(new TinderWelcomeServlet(templateEngine)), "/");
+        handler.addServlet(new ServletHolder(new TinderWelcomeServlet(templateEngine)), "/tinder");
+        handler.addServlet(new ServletHolder(new LoginServlet(userService, templateEngine)), "/login");
+        handler.addServlet(new ServletHolder(new LogoutServlet(userService,templateEngine)), "/logout");
+        handler.addServlet(new ServletHolder(new ProfilesServlet(userService, templateEngine)), "/profiles");
+        handler.addServlet(new ServletHolder(new RegistrationServlet(userService, templateEngine)), "/create");
+
+
+//        handler.addServlet(new ServletHolder(new FileServlet()), "/assets/*");
+//        handler.addServlet(new ServletHolder(new LoginServlet(userService, templateEngine)), "/");
         handler.addServlet(new ServletHolder(new LikesServlet(templateEngine)),"/liked");
         handler.addServlet(new ServletHolder(new MessageServlet(templateEngine,messageService)),"/message");
 
