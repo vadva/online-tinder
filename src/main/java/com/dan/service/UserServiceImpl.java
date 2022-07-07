@@ -4,13 +4,14 @@ import com.dan.Enteties.User;
 import com.dan.dao.UserDao;
 import java.util.List;
 
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService{
 
   private UserDao userDao;
 
   public UserServiceImpl(UserDao userDao) {
     this.userDao = userDao;
   }
+
 
   @Override
   public boolean create(User user) {
@@ -28,11 +29,6 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public boolean delete(Long id) {
-    return userDao.delete(id);
-  }
-
-  @Override
   public List<User> findAll() {
     return userDao.findAll();
   }
@@ -40,23 +36,6 @@ public class UserServiceImpl implements UserService {
   @Override
   public User findByLoginPass(String login, String password) {
     return userDao.findByLoginPass(login, password);
-  }
-
-
-  // _________________________________________________________
-  @Override
-  public boolean setIsLiked(Long id, boolean isLiked) {
-    return false;
-  }
-
-  @Override
-  public boolean addLikedToList(Long user_id) {
-    return false;
-  }
-
-  @Override
-  public boolean addChatToList(Long chat_id) {
-    return false;
   }
 
 }
