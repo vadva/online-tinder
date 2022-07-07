@@ -3,77 +3,41 @@ package com.dan.Enteties;
 import java.util.*;
 
 public class User {
-  private Long id;
-  private String name;
-  private int age;
-  private String profession;
-  private String pictureSrc;
-  private Date lastLogin;
-
+  private Long userId;
   private String login;
   private String password;
+  private String onlineStatus;
+  private String userName;
+  private int age;
+  private String aboutSelf;
+  private String pictureSrc;
 
-  private HashMap<Long, Boolean> isLiked;
-  private List<Long> likedUsersIdList;
-  private List<Long> chatsIdList;
 
-
-  public User(Long id, String name, int age, String profession,
-              String pictureSrc, Date lastLogin, String login, String password) {
-    this.id = id;
-    this.name = name;
-    this.age = age;
-    this.profession = profession;
-    this.pictureSrc = pictureSrc;
-    this.lastLogin = lastLogin;
+  public User(Long userId, String login, String password, String userName) {
+    this.userId = userId;
     this.login = login;
     this.password = password;
-    this.isLiked = new HashMap<>();
-    this.isLiked.put(0L, false);
-    this.likedUsersIdList = new ArrayList<>();
-    this.chatsIdList = new ArrayList<>();
+    this.userName = userName;
   }
 
-  public Long getId() {
-    return id;
-  }
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public String getName() {
-    return name;
-  }
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public int getAge() {
-    return age;
-  }
-  public void setAge(int age) {
+  public User(Long userId, String login, String password, String onlineStatus,
+              String userName, int age, String aboutSelf, String pictureSrc) {
+    this.userId = userId;
+    this.login = login;
+    this.password = password;
+    this.onlineStatus = onlineStatus;
+    this.userName = userName;
     this.age = age;
-  }
-
-  public String getProfession() {
-    return profession;
-  }
-  public void setProfession(String profession) {
-    this.profession = profession;
-  }
-
-  public String getPictureSrc() {
-    return pictureSrc;
-  }
-  public void setPictureSrc(String pictureSrc) {
+    this.aboutSelf = aboutSelf;
     this.pictureSrc = pictureSrc;
   }
 
-  public Date getLastLogin() {
-    return lastLogin;
+
+  public Long getUserId() {
+    return userId;
   }
-  public void setLastLogin(Date lastLogin) {
-    this.lastLogin = lastLogin;
+  public void setUserId(Long userId) {
+    this.userId = userId;
   }
 
   public String getLogin() {
@@ -90,25 +54,39 @@ public class User {
     this.password = password;
   }
 
-  public HashMap<Long, Boolean> getLiked() {
-    return isLiked;
+  public String getOnlineStatus() {
+    return onlineStatus;
   }
-  public void setLiked(HashMap<Long, Boolean> liked) {
-    this.isLiked = liked;
-  }
-
-  public List<Long> getLikedUsersIdList() {
-    return likedUsersIdList;
-  }
-  public void setLikedUsersIdList(List<Long> likedUsersIdList) {
-    this.likedUsersIdList = likedUsersIdList;
+  public void setOnlineStatus(String onlineStatus) {
+    this.onlineStatus = onlineStatus;
   }
 
-  public List<Long> getChatsIdList() {
-    return chatsIdList;
+  public String getUserName() {
+    return userName;
   }
-  public void setChatsIdList(List<Long> chatsIdList) {
-    this.chatsIdList = chatsIdList;
+  public void setUserName(String userName) {
+    this.userName = userName;
+  }
+
+  public int getAge() {
+    return age;
+  }
+  public void setAge(int age) {
+    this.age = age;
+  }
+
+  public String getAboutSelf() {
+    return aboutSelf;
+  }
+  public void setAboutSelf(String aboutSelf) {
+    this.aboutSelf = aboutSelf;
+  }
+
+  public String getPictureSrc() {
+    return pictureSrc;
+  }
+  public void setPictureSrc(String pictureSrc) {
+    this.pictureSrc = pictureSrc;
   }
 
 
@@ -117,23 +95,24 @@ public class User {
     if (this == o) return true;
     if (!(o instanceof User)) return false;
     User user = (User) o;
-    return id.equals(user.id) && login.equals(user.login) && password.equals(user.password);
+    return getUserId().equals(user.getUserId()) && getLogin().equals(user.getLogin()) && getPassword().equals(user.getPassword());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, login, password);
+    return Objects.hash(getUserId(), getLogin(), getPassword());
   }
 
   @Override
   public String toString() {
     return "User{" +
-        "pictureSrc='" + pictureSrc + '\'' +
-        ", name='" + name + '\'' +
-        ", age=" + age +
-        ", profession='" + profession + '\'' +
-        ", lastLogin=" + lastLogin +
-        '}';
+            "userId=" + userId +
+            ", onlineStatus='" + onlineStatus + '\'' +
+            ", userName='" + userName + '\'' +
+            ", age=" + age +
+            ", aboutSelf='" + aboutSelf + '\'' +
+            ", pictureSrc='" + pictureSrc + '\'' +
+            '}';
   }
 
 }

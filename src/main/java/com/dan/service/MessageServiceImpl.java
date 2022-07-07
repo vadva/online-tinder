@@ -25,7 +25,7 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public List<Message> getAllMessages() {
-       return messageDao.getAllMessages();
+        return messageDao.getAllMessages();
     };
 
     @Override
