@@ -1,5 +1,6 @@
 package com.dan.dao;
 
+import com.dan.Enteties.User;
 import org.postgresql.ds.PGPoolingDataSource;
 
 import java.sql.Connection;
@@ -9,11 +10,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LikesJdbcDao implements LikesDao{
+public class LikesJdbcDao implements LikesDao {
 
     private PGPoolingDataSource source;
 
-    public LikesJdbcDao () {
+    public LikesJdbcDao() {
         source = new PGPoolingDataSource();
         source.setServerName("ec2-54-159-22-90.compute-1.amazonaws.com");
         source.setDatabaseName("d72gjotub2dfrp");
@@ -23,7 +24,7 @@ public class LikesJdbcDao implements LikesDao{
     }
 
     @Override
-    public List<Integer> readLikedUsers(int userId) {
+    public List<Integer> readLiked(int userId) {
         Connection connection = null;
         List<Integer> likesIdList = new ArrayList<>();
 
@@ -38,18 +39,63 @@ public class LikesJdbcDao implements LikesDao{
             while (resultSet.next()) {
                 likesIdList.add(resultSet.getInt("whom_like_id"));
             }
-        }catch (SQLException sqlException) {
+        } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         } finally {
             if (connection != null) {
                 try {
                     connection.close();
-                }catch (SQLException sqlException) {
+                } catch (SQLException sqlException) {
                     sqlException.printStackTrace();
                 }
             }
         }
 
         return likesIdList;
+    }
+
+    @Override
+    public List<User> readLikedUsers(int userId) {
+        List<User> likedUsers = new ArrayList<>();
+
+        Connection connection = null;
+
+        try {
+            connection = source.getConnection();
+            connection.setAutoCommit(false);
+
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement(
+                            "SELECT * FROM users WHERE id IN" +
+                                    " (SELECT whom_like_id FROM likes WHERE who_like_id = ? AND is_liked = true)"
+                    );
+
+            preparedStatement.setInt(1, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+//                User user = new User(
+                        // need table at DB
+//                );
+            }
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException sqlException) {
+                    sqlException.printStackTrace();
+                }
+            }
+        }
+
+        return likedUsers;
+    }
+
+    @Override
+    public void likeUser(int userId, int candidateId, boolean verdict) {
+
     }
 }

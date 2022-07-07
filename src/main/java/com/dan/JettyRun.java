@@ -1,19 +1,15 @@
 package com.dan;
 
-import com.dan.controller.FileServlet;
-import com.dan.controller.LikesServlet;
-import com.dan.controller.LoginServlet;
-import com.dan.controller.TemplateEngine;
-import com.dan.dao.LikesDao;
-import com.dan.dao.LikesJdbcDao;
-import com.dan.dao.UserJdbcDao;
-import com.dan.service.LikeService;
-import com.dan.service.LikeServiceImpl;
-import com.dan.service.UserServiceImpl;
-import com.dan.service.UserService;
+import com.dan.controller.*;
+import com.dan.dao.*;
+import com.dan.service.*;
+import org.eclipse.jetty.servlet.FilterHolder;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+
+import javax.servlet.DispatcherType;
+import java.util.EnumSet;
 
 
 public class JettyRun {
@@ -29,7 +25,6 @@ public class JettyRun {
 
         Server server = new Server(port);
         ServletContextHandler handler = new ServletContextHandler();
-        UserService userService = new UserServiceImpl(new UserJdbcDao());
 
         final LikesDao likesDao = new LikesJdbcDao();
         LikeService likeService = new LikeServiceImpl(likesDao);
@@ -38,8 +33,7 @@ public class JettyRun {
 
 
         handler.addServlet(new ServletHolder(new FileServlet()), "/assets/*");
-        handler.addServlet(new ServletHolder(new LoginServlet(templateEngine)), "/");
-        handler.addServlet(new ServletHolder(new LikesServlet(templateEngine)),"/liked");
+        handler.addServlet(new ServletHolder(new LikesServlet(templateEngine, likeService)),"/liked");
 
         server.setHandler(handler);
         server.start();
