@@ -66,8 +66,8 @@ public class LikesJdbcDao implements LikesDao {
 
             PreparedStatement preparedStatement =
                     connection.prepareStatement(
-                            "SELECT * FROM users WHERE id IN" +
-                                    " (SELECT whom_like_id FROM likes WHERE who_like_id = ? AND is_liked = true)"
+                            "SELECT * FROM tinder.users WHERE id IN" +
+                                    " (SELECT whom_like_id FROM tinder.likes WHERE who_like_id = ? AND is_liked = true)"
                     );
 
             preparedStatement.setInt(1, userId);
