@@ -16,10 +16,10 @@ public class LikesJdbcDao implements LikesDao {
 
     public LikesJdbcDao() {
         source = new PGPoolingDataSource();
-        source.setServerName("ec2-54-159-22-90.compute-1.amazonaws.com");
-        source.setDatabaseName("d72gjotub2dfrp");
-        source.setUser("wmnxpqntdirjkb");
-        source.setPassword("ce9b5659604e1a2691c26617919799d3759e183430c601440e2c2d96a99b4653");
+        source.setServerName("ec2-3-219-52-220.compute-1.amazonaws.com");
+        source.setDatabaseName("d87q8v1p2jorm1");
+        source.setUser("jllpdpjeljafsq");
+        source.setPassword("f5cf29cb8c6a68de19e09ef32a9933486f33068b508d3502c7fb607dcad98eaf");
         source.setMaxConnections(10);
     }
 
