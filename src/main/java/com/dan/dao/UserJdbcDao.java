@@ -11,12 +11,7 @@ public class UserJdbcDao implements UserDao{
     private PGPoolingDataSource source;
 
     public UserJdbcDao() {
-        source = new PGPoolingDataSource();
-        source.setServerName("ec2-3-219-52-220.compute-1.amazonaws.com");
-        source.setDatabaseName("d87q8v1p2jorm1");
-        source.setUser("jllpdpjeljafsq");
-        source.setPassword("f5cf29cb8c6a68de19e09ef32a9933486f33068b508d3502c7fb607dcad98eaf");
-        source.setMaxConnections(10);
+        source = new SourceUtil().getSource();
     }
 
     @Override
