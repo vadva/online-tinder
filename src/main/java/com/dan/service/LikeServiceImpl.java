@@ -1,6 +1,7 @@
 package com.dan.service;
 
 
+import com.dan.Enteties.User;
 import com.dan.dao.LikesDao;
 
 import java.util.List;
@@ -14,7 +15,17 @@ public class LikeServiceImpl implements LikeService {
     }
 
     @Override
-    public List<Integer> readLikedUsers(int userId) {
+    public List<Integer> readLiked(int userId) {
+        return likesDao.readLiked(userId);
+    }
+
+    @Override
+    public List<User> readLikedUsers(int userId) {
         return likesDao.readLikedUsers(userId);
+    }
+
+    @Override
+    public void likeUser(int userId, int candidateId, boolean verdict) {
+
     }
 }
