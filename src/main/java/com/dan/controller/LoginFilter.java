@@ -42,7 +42,6 @@ public class LoginFilter implements Filter {
 
       Optional<Cookie> optionalCookie = CookieUtil.getCookieByName(request, USER_PARAM_ID); // "id"
       if (optionalCookie.isEmpty()) {
-        System.out.println("optionalCookie.isEmpty()");
 
         String login = request.getParameter("login");
         String password = request.getParameter("password");

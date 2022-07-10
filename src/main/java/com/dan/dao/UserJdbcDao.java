@@ -112,9 +112,7 @@ public class UserJdbcDao implements UserDao{
         Connection connection = null;
         try {
             connection = source.getConnection();
-//      PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users.users");
             PreparedStatement preparedStatement = connection.prepareStatement(
-//          "SELECT id, name, login, password, lastLogin, pictureSrc, AGE() FROM users.users"
                 "SELECT user_id, login, password, is_online, name, age, about_self, picture_src, " +
                     "AGE(CURRENT_TIMESTAMP(0), log_out_date) as last_online FROM tinder.users"
             );
@@ -122,16 +120,9 @@ public class UserJdbcDao implements UserDao{
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()) {
                 long id = resultSet.getLong("user_id");
-                System.out.println("id = " + id);
-
                 String login = resultSet.getString("login");
-                System.out.println("login = " + login);
-
                 String password = resultSet.getString("password");
-                System.out.println("password = " + password);
-
                 boolean isOnline = resultSet.getBoolean("is_online");
-                System.out.println("isOnline = " + isOnline);
 
                 String onlineStatus;
                 if(isOnline) {
@@ -139,19 +130,11 @@ public class UserJdbcDao implements UserDao{
                 } else {
                     onlineStatus = "Last seen "  + resultSet.getString("last_online") + " ago";
                 }
-                System.out.println("onlineStatus = " + onlineStatus);
 
                 String name = resultSet.getString("name");
-                System.out.println("name = " + name);
-
                 int age = resultSet.getInt("age");
-                System.out.println("age = " + age);
-
                 String aboutSelf = resultSet.getString("about_self");
-                System.out.println("pictureSrc = " + aboutSelf);
-
                 String pictureSrc = resultSet.getString("picture_src");
-                System.out.println("pictureSrc = " + pictureSrc);
 
                 users.add(new User(id, login, password, onlineStatus, name, age, aboutSelf, pictureSrc));
             }
@@ -166,7 +149,6 @@ public class UserJdbcDao implements UserDao{
                 }
             }
         }
-        System.out.println(users);
         return users;
     }
 
