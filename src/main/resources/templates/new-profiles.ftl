@@ -83,7 +83,7 @@
                      width="18%" height="18%" class="float-md-start d-inline-block align-text-top">
             </a>
             <nav class="nav nav-masthead justify-content-center float-md-end">
-                <a href="/friends" role="button" class="nav-link fw-bold py-1 px-0 active">Check your tinderS</a>
+                <a href="/liked" role="button" class="nav-link fw-bold py-1 px-0 active">Check your tinderS</a>
                 <a class="nav-link py-1 px-0" href="">Safety</a>
                 <a class="nav-link  py-1 px-0" href="">Support</a>
                 <a class="nav-link py-1 px-0" href="">Features</a>
@@ -108,7 +108,7 @@
                             <div class="col-md-6">
                                 <#if user.pictureSrc??>
                                     <div style="height: 400px;">
-                                        <img class="img-fluid mx-auto d-block" height="auto" src="${user.pictureSrc}" style="max-width: 100%;"/>
+                                        <img class="img-fluid mx-auto d-block bg-light" alt="avatar" src="${user.pictureSrc}" style="max-width: 100%; height: auto;"/>
                                     </div>
                                 <#else>
                                     <svg class="bd-placeholder-img img-fluid rounded-end" width="100%" height="400"
@@ -120,9 +120,9 @@
                                 </#if>
                             </div>
                             <div class="col-md-6">
-                                <div class="card-body text-black bg-white">
+                                <div class="card-body text-black bg-white" style="padding-bottom: 0;">
                                     <h5 class="">Hello, I'm ${user.userName}</h5>
-                                    <p class="">${user.aboutSelf}</p>
+                                    <p class="" style="min-height: 180px; height: fit-content">${user.aboutSelf}</p>
                                     <p class=""><small class="text-muted">${user.onlineStatus}</small></p>
 
                                     <div class="text-end sticky-bottom">
@@ -141,7 +141,7 @@
                             <div class="col-md-6">
                                 <#if user.pictureSrc??>
                                     <div style="height: 400px;">
-                                        <img class="img-fluid" height="auto" src="${user.pictureSrc}" style="max-width: 100%;"/>
+                                        <img class="img-fluid mx-auto d-block bg-light" alt="avatar" src="${user.pictureSrc}" style="max-width: 100%; height: auto;"/>
                                     </div>
                                 <#else>
                                     <svg class="bd-placeholder-img img-fluid rounded-end" width="100%" height="400"
@@ -153,9 +153,9 @@
                                 </#if>
                             </div>
                             <div class="col-md-6">
-                                <div class="card-body text-black bg-white">
+                                <div class="card-body text-black bg-white" style="padding-bottom: 0;">
                                     <h5 class="">Hello, I'm ${user.userName}</h5>
-                                    <p class="">${user.aboutSelf}</p>
+                                    <p class="" style="min-height: 180px; height: fit-content">${user.aboutSelf}</p>
                                     <p class=""><small class="text-muted">${user.onlineStatus}</small></p>
 
                                     <div class="text-end sticky-bottom">
