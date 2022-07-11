@@ -77,26 +77,45 @@
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
     <header class="mb-auto">
         <div>
-            <a href="/tinder" role="button">
-                <img src="/assets/img/tinder_logo_white.png" alt="Tinder | Dating, Make Friends & Meet New People | Welcome"
-                     width="18%" height="18%" class="float-md-start d-inline-block align-text-top">
-            </a>
+            <#if isOnline??>
+                <a href="/tinder" role="button">
+                    <img src="/assets/img/tinder_logo_blue.png" alt="Tinder | Dating, Make Friends & Meet New People | Welcome"
+                         width="18%" height="18%" class="float-md-start d-inline-block align-text-top">
+                </a>
+            <#else>
+                <a href="/" role="button">
+                    <img src="/assets/img/tinder_logo_white.png" alt="Tinder | Dating, Make Friends & Meet New People | Welcome"
+                         width="18%" height="18%" class="float-md-start d-inline-block align-text-top">
+                </a>
+            </#if>
             <nav class="nav nav-masthead justify-content-center float-md-end">
                 <a class="nav-link py-1 px-0" href="">Safety</a>
                 <a class="nav-link  py-1 px-0" href="">Support</a>
                 <a class="nav-link py-1 px-0" href="">Features</a>
                 <a class="nav-link py-1 px-0" href="">Contact</a>
                 <a class="nav-link py-1 px-0" href="">Download</a>
-                <a href="/login" role="button" class="nav-link fw-bold py-1 px-0 active">Log in</a>
+                <#if isOnline??>
+                    <a href="/logout" role="button" class="nav-link py-1 px-0 active">log out</a>
+                <#else>
+                    <a href="/login" role="button" class="nav-link py-1 px-0 active">Log in</a>
+                </#if>
             </nav>
         </div>
     </header>
 
     <main class="px-3">
-        <h1>Dating, Make Friends & Meet New People</h1>
-        <p class="lead">
-            <a href="/create" role="button" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Create an account</a>
-        </p>
+        <h1 style="margin-top: 1.5rem; margin-bottom: 1.5rem;">Dating, Make Friends & Meet New People</h1>
+        <#if isOnline??>
+            <p class="lead">
+                <a href="/profiles" role="button" class="btn btn-lg fw-bold border-white bg-black"
+                   style="--bs-btn-color: #428dff; --bs-btn-hover-color: blueviolet;">Meet new people</a>
+            </p>
+        <#else>
+            <p class="lead">
+                <a href="/create" role="button" class="btn btn-lg fw-bold border-white bg-black"
+                   style="--bs-btn-color: #428dff; --bs-btn-hover-color: blueviolet;">Create an account</a>
+            </p>
+        </#if>
     </main>
 
     <footer class="mt-auto text-white-50">

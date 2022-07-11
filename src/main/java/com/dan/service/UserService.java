@@ -14,4 +14,8 @@ public interface UserService {
 
   User findByLoginPass(String login, String password);
 
+  boolean updateOnlineStatus(long id, boolean isLoginIn);
+
+  public List<User> findNewProfiles(long activeUserId);
+
 }
