@@ -35,6 +35,6 @@ public class LikesServlet extends HttpServlet {
 //        data.put("user", loggedUser);
         data.put("like", "likes");
 
-        templateEngine.render("people-list.ftl", data, resp);
+        templateEngine.render("like-page.ftl", data, resp);
     }
 }

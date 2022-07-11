@@ -1,7 +1,5 @@
 package com.dan.controller;
 
-import com.dan.service.UserService;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,11 +8,8 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class LoginServlet extends HttpServlet {
-  private UserService userService;
   private TemplateEngine templateEngine;
-
-  public LoginServlet(UserService userService, TemplateEngine templateEngine) {
-    this.userService = userService;
+  public LoginServlet(TemplateEngine templateEngine) {
     this.templateEngine = templateEngine;
   }
 

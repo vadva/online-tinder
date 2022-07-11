@@ -39,8 +39,8 @@ public class JettyRun {
         handler.addServlet(new ServletHolder(new FileServlet()), "/assets/*");
         handler.addServlet(new ServletHolder(new TinderWelcomeServlet(templateEngine)), "/");
         handler.addServlet(new ServletHolder(new TinderWelcomeServlet(templateEngine)), "/tinder");
-        handler.addServlet(new ServletHolder(new LoginServlet(userService, templateEngine)), "/login");
-        handler.addServlet(new ServletHolder(new LogoutServlet(userService,templateEngine)), "/logout");
+        handler.addServlet(new ServletHolder(new LoginServlet(templateEngine)), "/login");
+        handler.addServlet(new ServletHolder(new LogoutServlet(userService)), "/logout");
         handler.addServlet(new ServletHolder(new ProfilesServlet(userService, templateEngine)), "/profiles");
         handler.addServlet(new ServletHolder(new RegistrationServlet(userService, templateEngine)), "/create");
         handler.addServlet(new ServletHolder(new LikesServlet(templateEngine, likeService)),"/liked");

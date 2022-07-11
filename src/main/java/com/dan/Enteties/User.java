@@ -12,12 +12,12 @@ public class User {
   private String aboutSelf;
   private String pictureSrc;
 
-
-  public User(Long userId, String login, String password, String userName) {
+  public User(Long userId, String userName, int age, String login, String password) {
     this.userId = userId;
+    this.userName = userName;
+    this.age = age;
     this.login = login;
     this.password = password;
-    this.userName = userName;
   }
 
   public User(Long userId, String login, String password, String onlineStatus,
@@ -31,7 +31,6 @@ public class User {
     this.aboutSelf = aboutSelf;
     this.pictureSrc = pictureSrc;
   }
-
 
   public Long getUserId() {
     return userId;
@@ -89,7 +88,6 @@ public class User {
     this.pictureSrc = pictureSrc;
   }
 
-
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -111,7 +109,6 @@ public class User {
         ", userName='" + userName + '\'' +
         ", age=" + age +
         ", aboutSelf='" + aboutSelf + '\'' +
-        ", pictureSrc='" + pictureSrc + '\'' +
         '}';
   }
 
