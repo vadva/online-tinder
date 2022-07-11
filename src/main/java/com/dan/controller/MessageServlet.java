@@ -12,18 +12,20 @@ import java.util.List;
 
 public class MessageServlet extends HttpServlet {
     private TemplateEngine templateEngine;
-    private MessageDao messageService;
+    private MessageService messageService;
 
     public MessageServlet(TemplateEngine templateEngine, MessageService messageService){
         this.templateEngine=templateEngine;
+        this.messageService=messageService;
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp){
-        String idUser = req.getParameter("idUser");
-        System.out.println(idUser);
+//        String idUser = req.getParameter("idUser");
+//        System.out.println(idUser);
 
         List<Message> messages = messageService.getAllMessages();
+        System.out.println(messages);
 
         HashMap<String,Object> data= new HashMap<>();
         data.put("messages",messages);

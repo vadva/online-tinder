@@ -13,16 +13,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class MessageJdbcDao implements com.dan.dao.MessageDao {
+public class MessageJdbcDao implements MessageDao {
     private PGPoolingDataSource source;
 
     public MessageJdbcDao() {
-        source = new PGPoolingDataSource();
-        source.setServerName("ec2-3-219-52-220.compute-1.amazonaws.com");
-        source.setDatabaseName("d87q8v1p2jorm1");
-        source.setUser("jllpdpjeljafsq");
-        source.setPassword("f5cf29cb8c6a68de19e09ef32a9933486f33068b508d3502c7fb607dcad98eaf");
-        source.setMaxConnections(10);
+        source = new SourceUtil().getSource();
     }
 
     @Override
@@ -41,22 +36,20 @@ public class MessageJdbcDao implements com.dan.dao.MessageDao {
             List <Message> allMessages = new ArrayList<>();
         try{
             connection= source.getConnection();
-            System.out.println(connection);
             connection.setAutoCommit(false);
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM messages");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM tinder.messages");
 
             System.out.println(preparedStatement);
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 long message_id = resultSet.getLong("message_id");
                 Integer user_id_who_write = resultSet.getInt("user_id_who_write");
-                Integer user_id_to_whom_write = resultSet.getInt("user_id_to_whom_write");
+                Integer user_id_whom_write = resultSet.getInt("user_id_whom_write");
                 String message_text = resultSet.getString("message_text");
                 Date message_data = resultSet.getDate("message_data");
-                Message message = new Message(message_id,user_id_who_write,user_id_to_whom_write,message_text,message_data);
+                Message message = new Message(message_id,user_id_who_write,user_id_whom_write,message_text,message_data);
+
                 allMessages.add(message);
-                System.out.println(allMessages.get(0));
-                return allMessages;
             }
 
         } catch (SQLException e) {
@@ -70,7 +63,7 @@ public class MessageJdbcDao implements com.dan.dao.MessageDao {
                 }
             }
         }
-        return null;
+        return allMessages;
     }
 
     @Override

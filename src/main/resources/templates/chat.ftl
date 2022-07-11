@@ -55,7 +55,7 @@
                             <div class="receive-msg-desc float-left ml-2">
                                 <p class="bg-white m-0 pt-1 pb-1 pl-2 pr-2 rounded">
                                     hiii <br>
-                                    {message.getMessage_text()}<br>
+                                    ${message.getMessage_text()}<br>
                                     How are you ?<br>
                                 </p>
                                 <span class="receive-msg-time">ketty, Jan 25, 6:20 PM</span>
