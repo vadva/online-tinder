@@ -118,16 +118,18 @@
                                             </#if>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="card-body text-black bg-white" style="padding-bottom: 0;">
-                                                <h5 class="">Hello, I'm ${user.userName}</h5>
-                                                <p class="" style="min-height: 180px; height: fit-content">${user.aboutSelf}</p>
-                                                <p class=""><small class="text-muted">${user.onlineStatus}</small></p>
+                                            <form action="/profiles" method="get">
+                                                <div class="card-body text-black bg-white" style="padding-bottom: 0;">
+                                                    <h5 class="">Hello, I'm ${user.userName}</h5>
+                                                    <p class="" style="min-height: 180px; height: fit-content">${user.aboutSelf}</p>
+                                                    <p class=""><small class="text-muted">${user.onlineStatus}</small></p>
 
-                                                <div class="text-end sticky-bottom">
-                                                    <a href="" class="btn btn-outline-secondary">DisLike</a>
-                                                    <a href="" class="btn btn-outline-danger">Like</a>
+                                                    <div class="text-end sticky-bottom">
+                                                        <button type="submit" value="Like_${user.userId}" name="Like" class="btn btn-outline-secondary">Like</button>
+                                                        <button type="submit" value="Dislike_${user.userId}" name="Dislike" class="btn btn-outline-danger">Dislike</button>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -150,16 +152,18 @@
                                             </#if>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="card-body text-black bg-white" style="padding-bottom: 0;">
-                                                <h5 class="">Hello, I'm ${user.userName}</h5>
-                                                <p class="" style="min-height: 180px; height: fit-content">${user.aboutSelf}</p>
-                                                <p class=""><small class="text-muted">${user.onlineStatus}</small></p>
+                                            <form action="/profiles" method="get">
+                                                <div class="card-body text-black bg-white" style="padding-bottom: 0;">
+                                                    <h5 class="">Hello, I'm ${user.userName}</h5>
+                                                    <p class="" style="min-height: 180px; height: fit-content">${user.aboutSelf}</p>
+                                                    <p class=""><small class="text-muted">${user.onlineStatus}</small></p>
 
-                                                <div class="text-end sticky-bottom">
-                                                    <a href="" class="btn btn-outline-secondary">DisLike</a>
-                                                    <a href="" class="btn btn-outline-danger">Like</a>
+                                                    <div class="text-end sticky-bottom">
+                                                        <button type="submit" value="Like_${user.userId}" name="Like" class="btn btn-outline-secondary">Like</button>
+                                                        <button type="submit" value="Dislike_${user.userId}" name="Dislike" class="btn btn-outline-danger">Dislike</button>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

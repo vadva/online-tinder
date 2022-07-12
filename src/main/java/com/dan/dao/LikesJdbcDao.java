@@ -103,13 +103,52 @@ public class LikesJdbcDao implements LikesDao {
             }
         }
 
-        System.out.println(likedUsers);
-
         return likedUsers;
     }
 
     @Override
     public void likeUser(int userId, int candidateId, boolean verdict) {
+        Connection connection = null;
 
+        try {
+            connection = source.getConnection();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "SELECT * FROM tinder.likes WHERE who_like_id = ? AND whom_like_id = ?"
+            );
+
+            preparedStatement.setInt(1, userId);
+            preparedStatement.setInt(2, candidateId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            PreparedStatement updateLikeQuery = null;
+
+            // проверка на то, были ли какие-то заимодействия между юзерами
+            if (resultSet.isBeforeFirst()) {
+                updateLikeQuery = connection.prepareStatement(
+                        "UPDATE tinder.likes SET is_liked = ? WHERE who_like_id = ? AND whom_like_id = ?"
+                );
+            }else {
+                updateLikeQuery = connection.prepareStatement(
+                        "INSERT INTO tinder.likes (is_liked, who_like_id, whom_like_id) VALUES (?,?,?)"
+                );
+            }
+
+            updateLikeQuery.setBoolean(1, verdict);
+            updateLikeQuery.setInt(2, userId);
+            updateLikeQuery.setInt(3, candidateId);
+            int update = updateLikeQuery.executeUpdate();
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException sqlException) {
+                    sqlException.printStackTrace();
+                }
+            }
+        }
     }
 }

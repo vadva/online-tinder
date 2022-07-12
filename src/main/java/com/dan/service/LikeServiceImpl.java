@@ -26,6 +26,6 @@ public class LikeServiceImpl implements LikeService {
 
     @Override
     public void likeUser(int userId, int candidateId, boolean verdict) {
-
+        likesDao.likeUser(userId, candidateId, verdict);
     }
 }
