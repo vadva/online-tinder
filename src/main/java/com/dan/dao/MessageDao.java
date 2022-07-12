@@ -7,9 +7,8 @@ import java.util.List;
 
 public interface MessageDao {
     public Message createMessage();
-    public Message deleteMessage();
+    public Message deleteMessage(Long Id);
     public List<Message> getAllMessages();
-    public List<Message> getAllMessagesFromUserId(User user);
-    public List<Message> getAllMessagesToUserId(User user);
-    public Message updateMessageById(Message message);
+    public List<Message> getAllMessagesToUserId(Integer fromUserId,Integer toUserId);
+    public Message updateMessageById(Long Id);
 }

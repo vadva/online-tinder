@@ -120,7 +120,7 @@
                                 <td>${user.aboutSelf}</td>
                                 <td>${user.age}</td>
                                 <td>
-                                    <form action=`/messages/${user.userId}` method="get">
+                                    <form action="/message/${user.userId}" method="get">
                                         <button class="btn btn-primary" type="submit">Start chatting</button>
                                     </form>
                                 </td>
