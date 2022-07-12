@@ -27,6 +27,14 @@ public class LikesServlet extends HttpServlet {
         Optional<Cookie> optionalCookie = CookieUtil.getCookieByName(req, "id");
 
         int loggedUserId = Integer.parseInt(optionalCookie.get().getValue());
+
+        String dislike = req.getParameter("Dislike");
+
+        if (dislike != null) {
+            int candidateId = Integer.parseInt(dislike.substring(dislike.length() - 1));
+            likeService.likeUser(loggedUserId, candidateId, false);
+        }
+
         List<User> likedUsers = likeService.readLikedUsers(loggedUserId);
 
         data.put("likedUsers", likedUsers);
