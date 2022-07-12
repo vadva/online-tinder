@@ -84,9 +84,9 @@
     </header>
 
     <main class="px-3">
-        <h1 class="h3 mb-3 font-weight-normal" style="color: #428dff;">Here is your Tinders</h1>
+        <#if likedUsers?size != 0 >
+            <h1 class="h3 mb-3 font-weight-normal" style="color: #428dff;">Here is your Tinders</h1>
 
-        <#if likedUsers??>
             <table class="table table-dark">
                 <thead>
                     <tr>
@@ -129,6 +129,8 @@
                     </#list>
                 </tbody>
             </table>
+        <#else>
+            <h1 class="h3 mb-3 font-weight-normal" style="color: #428dff;">You have not liked users</h1>
         </#if>
     </main>
 
