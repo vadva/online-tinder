@@ -15,12 +15,7 @@ public class LikesJdbcDao implements LikesDao {
     private PGPoolingDataSource source;
 
     public LikesJdbcDao() {
-        source = new PGPoolingDataSource();
-        source.setServerName("ec2-3-219-52-220.compute-1.amazonaws.com");
-        source.setDatabaseName("d87q8v1p2jorm1");
-        source.setUser("jllpdpjeljafsq");
-        source.setPassword("f5cf29cb8c6a68de19e09ef32a9933486f33068b508d3502c7fb607dcad98eaf");
-        source.setMaxConnections(10);
+        source = new SourceUtil().getSource();
     }
 
     @Override
@@ -32,7 +27,7 @@ public class LikesJdbcDao implements LikesDao {
             connection = source.getConnection();
             connection.setAutoCommit(false);
 
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM likes WHERE who_like_id = ? AND is_liked = true");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM tinder.likes WHERE who_like_id = ? AND is_liked = true");
             preparedStatement.setInt(1, userId);
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -66,7 +61,7 @@ public class LikesJdbcDao implements LikesDao {
 
             PreparedStatement preparedStatement =
                     connection.prepareStatement(
-                            "SELECT * FROM tinder.users WHERE id IN" +
+                            "SELECT * FROM tinder.users WHERE users.user_id IN" +
                                     " (SELECT whom_like_id FROM tinder.likes WHERE who_like_id = ? AND is_liked = true)"
                     );
 
@@ -74,9 +69,26 @@ public class LikesJdbcDao implements LikesDao {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-//                User user = new User(
-                        // need table at DB
-//                );
+                boolean isOnline = resultSet.getBoolean("is_online");
+                String onlineStatus;
+
+                if(isOnline) {
+                    onlineStatus = "Online now";
+                } else {
+                    onlineStatus = "Last seen "  + resultSet.getString("log_out_date") + " ago";
+                }
+
+                User user = new User(
+                    resultSet.getLong("user_id"),
+                    resultSet.getString("login"),
+                    resultSet.getString("password"),
+                    onlineStatus,
+                    resultSet.getString("name"),
+                    resultSet.getInt("age"),
+                    resultSet.getString("about_self"),
+                    resultSet.getString("picture_src")
+                );
+                likedUsers.add(user);
             }
 
         } catch (SQLException sqlException) {
@@ -90,6 +102,8 @@ public class LikesJdbcDao implements LikesDao {
                 }
             }
         }
+
+        System.out.println(likedUsers);
 
         return likedUsers;
     }

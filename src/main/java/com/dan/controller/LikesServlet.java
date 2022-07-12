@@ -1,40 +1,35 @@
 package com.dan.controller;
 
 import com.dan.Enteties.User;
-import com.dan.dao.LikesDao;
-import com.dan.dao.LikesJdbcDao;
+import com.dan.service.CookieUtil;
 import com.dan.service.LikeService;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 public class LikesServlet extends HttpServlet {
-    TemplateEngine templateEngine;
     LikeService likeService;
+    TemplateEngine templateEngine;
 
 
-    public LikesServlet(TemplateEngine templateEngine, LikeService likeService) {
-        this.templateEngine = templateEngine;
+    public LikesServlet(LikeService likeService, TemplateEngine templateEngine) {
         this.likeService = likeService;
+        this.templateEngine = templateEngine;
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HashMap<String, Object> data = new HashMap<>();
-//        HttpSession session = req.getSession();
-//        User loggedUser = (User) session.getAttribute("user");
-//        List<User> likedUsers = likeService.readLikedUsers(loggedUser.getId());
+        Optional<Cookie> optionalCookie = CookieUtil.getCookieByName(req, "id");
 
-//        data.put("likedUsers", likedUsers);
-//        data.put("user", loggedUser);
-        data.put("like", "likes");
+        int loggedUserId = Integer.parseInt(optionalCookie.get().getValue());
+        List<User> likedUsers = likeService.readLikedUsers(loggedUserId);
 
+        data.put("likedUsers", likedUsers);
         templateEngine.render("like-page.ftl", data, resp);
     }
 }

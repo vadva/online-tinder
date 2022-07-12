@@ -34,8 +34,9 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public List<Message> getAllMessagesToUserId(User user) {
-        return null;
+    public List<Message> getAllMessagesToUserId(Integer fromUserId,Integer toUserId) {
+
+        return messageDao.getAllMessagesToUserId(fromUserId,toUserId);
     }
 
     @Override
