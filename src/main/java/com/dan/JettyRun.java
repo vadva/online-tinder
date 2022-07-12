@@ -44,7 +44,7 @@ public class JettyRun {
         handler.addServlet(new ServletHolder(new ProfilesServlet(userService, likeService, templateEngine)), "/profiles");
         handler.addServlet(new ServletHolder(new RegistrationServlet(userService, templateEngine)), "/create");
         handler.addServlet(new ServletHolder(new LikesServlet(likeService, templateEngine)),"/liked");
-        handler.addServlet(new ServletHolder(new MessageServlet(templateEngine,messageService)),"/message");
+        handler.addServlet(new ServletHolder(new MessageServlet(templateEngine,messageService,userService)),"/message/*");
 
         server.setHandler(handler);
         server.start();

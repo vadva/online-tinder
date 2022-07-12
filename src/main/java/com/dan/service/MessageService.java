@@ -10,6 +10,6 @@ public interface MessageService {
     public Message deleteMessage();
     public List<Message> getAllMessages();
     public List<Message> getAllMessagesFromUserId(User user);
-    public List<Message> getAllMessagesToUserId(User user);
+    public List<Message> getAllMessagesToUserId(Integer fromUserId,Integer toUserId);
     public Message updateMessageById(Message message);
 }
