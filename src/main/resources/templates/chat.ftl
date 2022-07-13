@@ -55,7 +55,7 @@
                             </ul>
 
                         <#else>
-                            <ul class="p-0">
+                            <ul class="p-0" style=display:flex;justify-content:end>
                                 <li class="receive-msg float-left mb-2">
                                     <div class="sender-img">
                                         <img src="http://nicesnippets.com/demo/image1.jpg" class="float-left">
