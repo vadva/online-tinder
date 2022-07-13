@@ -83,7 +83,7 @@
         </div>
     </header>
 
-    <main class="px-3">
+    <main style="padding: 50px 0" class="px-3">
         <#if likedUsers?size != 0 >
             <h1 class="h3 mb-3 font-weight-normal" style="color: #428dff;">Here is your Tinders</h1>
 
@@ -119,9 +119,12 @@
                                 <td>${user.onlineStatus}</td>
                                 <td>${user.aboutSelf}</td>
                                 <td>${user.age}</td>
-                                <td>
+                                <td class="d-flex">
                                     <form action="/message/${user.userId}" method="get">
                                         <button class="btn btn-primary" type="submit">Start chatting</button>
+                                    </form>
+                                    <form action="/liked" method="get">
+                                        <button class="btn btn-danger" value="Dislike_${user.userId}" name="Dislike" type="submit">Delete from my tinders</button>
                                     </form>
                                 </td>
                             </tr>
