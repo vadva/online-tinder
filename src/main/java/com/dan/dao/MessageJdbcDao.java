@@ -5,14 +5,11 @@ import com.dan.Enteties.Message;
 import com.dan.Enteties.User;
 import org.postgresql.ds.PGPoolingDataSource;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 //import java.util.Date;
-import java.sql.Date;
 
 import java.util.List;
 
@@ -85,7 +82,6 @@ public class MessageJdbcDao implements MessageDao {
                 String message_text = resultSet.getString("message_text");
                 LocalDate message_data = LocalDate.parse(String.valueOf(resultSet.getDate("message_data")));
 
-                LocalDate.parse(String.valueOf(resultSet.getDate("message_data")));
                 Message message = new Message(message_id, user_id_who_write, user_id_whom_write, message_text, message_data);
 
                 allMessages.add(message);
@@ -133,9 +129,10 @@ public class MessageJdbcDao implements MessageDao {
                 Integer user_id_who_write = resultSet.getInt("user_id_who_write");
                 Integer user_id_whom_write = resultSet.getInt("user_id_whom_write");
                 String message_text = resultSet.getString("message_text");
-//                String login = resultSet.getString("login");
                 LocalDate message_data = LocalDate.parse(String.valueOf(resultSet.getDate("message_data")));
-                Message message = new Message(message_id, user_id_who_write, user_id_whom_write, message_text, message_data);
+                Time localTime = resultSet.getTime("message_time");
+
+                Message message = new Message(message_id, user_id_who_write, user_id_whom_write, message_text, message_data,localTime);
 
                 allMessages.add(message);
             }

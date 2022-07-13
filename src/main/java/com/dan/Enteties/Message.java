@@ -1,6 +1,8 @@
 package com.dan.Enteties;
 
+import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Message {
     Long message_id;
@@ -8,7 +10,16 @@ public class Message {
     Integer user_id_to_whom_write;
     String message_text;
     LocalDate message_data;
+    Time message_time;
 
+    public Message(Long message_id, Integer user_id_who_write, Integer user_id_to_whom_write, String message_text, LocalDate message_data, Time message_time) {
+        this.message_id = message_id;
+        this.user_id_who_write = user_id_who_write;
+        this.user_id_to_whom_write = user_id_to_whom_write;
+        this.message_text = message_text;
+        this.message_data = message_data;
+        this.message_time = message_time;
+    }
     public Message(Long message_id, Integer user_id_who_write, Integer user_id_to_whom_write, String message_text, LocalDate message_data) {
         this.message_id = message_id;
         this.user_id_who_write = user_id_who_write;
@@ -21,6 +32,14 @@ public class Message {
         this.user_id_to_whom_write = user_id_to_whom_write;
         this.message_text = message_text;
         this.message_data = message_data;
+    }
+
+    public Time getMessage_time() {
+        return message_time;
+    }
+
+    public void setMessage_time(Time message_time) {
+        this.message_time = message_time;
     }
 
     public Long getMessage_id() {
@@ -71,6 +90,7 @@ public class Message {
                 ", user_id_to_whom_write=" + user_id_to_whom_write +
                 ", message_text='" + message_text + '\'' +
                 ", message_data=" + message_data +
+                ", message_time=" + message_time +
                 '}';
     }
 }
