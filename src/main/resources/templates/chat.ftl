@@ -45,7 +45,7 @@
                     <#list messages as message>
                         <#if message.getUser_id_who_write()=userWhoWrite.getUserId()>
 
-                            <ul class="p-0">
+                            <ul class="p-0 d-flex justify-content-end">
                                 <li class="send-msg float-right mb-2">
                                     <p class="pt-1 pb-1 pl-2 pr-2 m-0 rounded">
                                         ${message.getMessage_text()}<br>
@@ -55,7 +55,7 @@
                             </ul>
 
                         <#else>
-                            <ul class="p-0" style=display:flex;justify-content:end>
+                            <ul class="p-0 ">
                                 <li class="receive-msg float-left mb-2">
                                     <div class="sender-img">
                                         <img src="http://nicesnippets.com/demo/image1.jpg" class="float-left">
