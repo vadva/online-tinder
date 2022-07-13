@@ -137,7 +137,7 @@ public class LikesJdbcDao implements LikesDao {
             updateLikeQuery.setBoolean(1, verdict);
             updateLikeQuery.setInt(2, userId);
             updateLikeQuery.setInt(3, candidateId);
-            int update = updateLikeQuery.executeUpdate();
+            updateLikeQuery.executeUpdate();
 
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
