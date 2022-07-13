@@ -6,8 +6,8 @@ import com.dan.Enteties.User;
 import java.util.List;
 
 public interface MessageService {
-    public Message createMessage();
-    public Message deleteMessage();
+    public boolean createMessage(Message message);
+    public boolean deleteMessage();
     public List<Message> getAllMessages();
     public List<Message> getAllMessagesFromUserId(User user);
     public List<Message> getAllMessagesToUserId(Integer fromUserId,Integer toUserId);
