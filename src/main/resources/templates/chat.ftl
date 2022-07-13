@@ -78,8 +78,12 @@
                         <div class="col-md-2 options-left">
                             <i class="fa fa-smile-o"></i>
                         </div>
-                        <div class="col-md-7 pl-0">
-                            <input type="text" class="border-0" placeholder=" Send message"/>
+                        <div class="pl-0">
+                            <form class="d-flex"  method="get">
+                                <input type="text" name="text" class="border-0 col" placeholder=" text message"/>
+                                <button class="btn btn-primary" type="submit">Send</button>
+                            </form>
+
                         </div>
                         <div class="col-md-3 text-right options-right">
                             <i class="fa fa-picture-o mr-2"></i>
