@@ -9,24 +9,25 @@ import java.util.List;
 public class MessageServiceImpl implements MessageService {
 
     MessageDao messageDao;
+
     public MessageServiceImpl(MessageDao messageDao) {
-        this.messageDao=  messageDao;
+        this.messageDao = messageDao;
     }
 
     @Override
-    public Message createMessage() {
-        return null;
+    public boolean createMessage(Message message) {
+        return messageDao.createMessage(message);
     }
 
     @Override
-    public Message deleteMessage() {
-        return null;
+    public boolean deleteMessage() {
+        return false;
     }
 
     @Override
     public List<Message> getAllMessages() {
-       return messageDao.getAllMessages();
-    };
+        return messageDao.getAllMessages();
+    }
 
     @Override
     public List<Message> getAllMessagesFromUserId(User user) {
@@ -34,9 +35,9 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public List<Message> getAllMessagesToUserId(Integer fromUserId,Integer toUserId) {
+    public List<Message> getAllMessagesToUserId(Integer fromUserId, Integer toUserId) {
 
-        return messageDao.getAllMessagesToUserId(fromUserId,toUserId);
+        return messageDao.getAllMessagesToUserId(fromUserId, toUserId);
     }
 
     @Override

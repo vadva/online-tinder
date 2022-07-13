@@ -45,7 +45,7 @@
                     <#list messages as message>
                         <#if message.getUser_id_who_write()=userWhoWrite.getUserId()>
 
-                            <ul class="p-0">
+                            <ul class="p-0 d-flex justify-content-end">
                                 <li class="send-msg float-right mb-2">
                                     <p class="pt-1 pb-1 pl-2 pr-2 m-0 rounded">
                                         ${message.getMessage_text()}<br>
@@ -55,7 +55,7 @@
                             </ul>
 
                         <#else>
-                            <ul class="p-0">
+                            <ul class="p-0 ">
                                 <li class="receive-msg float-left mb-2">
                                     <div class="sender-img">
                                         <img src="http://nicesnippets.com/demo/image1.jpg" class="float-left">
@@ -78,8 +78,12 @@
                         <div class="col-md-2 options-left">
                             <i class="fa fa-smile-o"></i>
                         </div>
-                        <div class="col-md-7 pl-0">
-                            <input type="text" class="border-0" placeholder=" Send message"/>
+                        <div class="pl-0">
+                            <form class="d-flex"  method="get">
+                                <input type="text" name="text" class="border-0 col" placeholder=" text message"/>
+                                <button class="btn btn-primary" type="submit">Send</button>
+                            </form>
+
                         </div>
                         <div class="col-md-3 text-right options-right">
                             <i class="fa fa-picture-o mr-2"></i>

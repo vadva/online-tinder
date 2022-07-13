@@ -9,8 +9,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
+//import java.util.Date;
+import java.sql.Date;
+
 import java.util.List;
 
 public class MessageJdbcDao implements MessageDao {
@@ -21,13 +24,47 @@ public class MessageJdbcDao implements MessageDao {
     }
 
     @Override
-    public Message createMessage() {
-        return null;
+    public boolean createMessage(Message message) {
+        Connection connection = null;
+        try {
+            connection = source.getConnection();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "INSERT INTO tinder.messages(user_id_who_write, user_id_whom_write, message_text, message_data) VALUES (?, ?, ?, ?)");
+            preparedStatement.setInt(1, message.getUser_id_who_write());
+            preparedStatement.setInt(2, message.getUser_id_to_whom_write());
+            preparedStatement.setString(3, message.getMessage_text());
+            preparedStatement.setDate(4, Date.valueOf(message.getMessage_data()));
+//            java.sql.Date sqlDate = new java.sql.Date(message.getLoginDate().getTime());
+
+            int executionResult = preparedStatement.executeUpdate();
+
+            return executionResult > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            if (connection != null) {
+                try {
+                    connection.rollback();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+        return false;
     }
 
     @Override
-    public Message deleteMessage(Long Id) {
-        return null;
+    public boolean deleteMessage(Long Id) {
+        return false;
     }
 
     @Override
@@ -46,7 +83,9 @@ public class MessageJdbcDao implements MessageDao {
                 Integer user_id_who_write = resultSet.getInt("user_id_who_write");
                 Integer user_id_whom_write = resultSet.getInt("user_id_whom_write");
                 String message_text = resultSet.getString("message_text");
-                Date message_data = resultSet.getDate("message_data");
+                LocalDate message_data = LocalDate.parse(String.valueOf(resultSet.getDate("message_data")));
+
+                LocalDate.parse(String.valueOf(resultSet.getDate("message_data")));
                 Message message = new Message(message_id, user_id_who_write, user_id_whom_write, message_text, message_data);
 
                 allMessages.add(message);
@@ -95,7 +134,7 @@ public class MessageJdbcDao implements MessageDao {
                 Integer user_id_whom_write = resultSet.getInt("user_id_whom_write");
                 String message_text = resultSet.getString("message_text");
 //                String login = resultSet.getString("login");
-                Date message_data = resultSet.getDate("message_data");
+                LocalDate message_data = LocalDate.parse(String.valueOf(resultSet.getDate("message_data")));
                 Message message = new Message(message_id, user_id_who_write, user_id_whom_write, message_text, message_data);
 
                 allMessages.add(message);

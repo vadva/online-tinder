@@ -1,16 +1,22 @@
 package com.dan.Enteties;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Message {
     Long message_id;
     Integer user_id_who_write;
     Integer user_id_to_whom_write;
     String message_text;
-    Date message_data;
+    LocalDate message_data;
 
-    public Message(Long message_id, Integer user_id_who_write, Integer user_id_to_whom_write, String message_text, Date message_data) {
+    public Message(Long message_id, Integer user_id_who_write, Integer user_id_to_whom_write, String message_text, LocalDate message_data) {
         this.message_id = message_id;
+        this.user_id_who_write = user_id_who_write;
+        this.user_id_to_whom_write = user_id_to_whom_write;
+        this.message_text = message_text;
+        this.message_data = message_data;
+    }
+    public Message( Integer user_id_who_write, Integer user_id_to_whom_write, String message_text, LocalDate message_data) {
         this.user_id_who_write = user_id_who_write;
         this.user_id_to_whom_write = user_id_to_whom_write;
         this.message_text = message_text;
@@ -33,7 +39,7 @@ public class Message {
         return message_text;
     }
 
-    public Date getMessage_data() {
+    public LocalDate getMessage_data() {
         return message_data;
     }
 
@@ -53,7 +59,7 @@ public class Message {
         this.message_text = message_text;
     }
 
-    public void setMessage_data(Date message_data) {
+    public void setMessage_data(LocalDate message_data) {
         this.message_data = message_data;
     }
 
